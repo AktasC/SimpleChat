@@ -1,0 +1,22 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "Simple webchat using Bulma and Socket.io",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cebrail AKTAS",
+  "license": "ISC",
+  "dependencies": {
+    "bulma": "^0.7.2",
+    "eslint": "^5.9.0",
+    "express": "^4.16.4",
+    "html": "^1.0.0",
+    "md5": "^2.2.1",
+    "mongoose": "^5.3.12",
+    "pug": "^2.0.3",
+    "socket.io": "^2.1.1"
+  }
+}

@@ -1,0 +1,90 @@
+doctype html
+head
+  title Chat.io
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css')
+  script(defer='' src='https://use.fontawesome.com/releases/v5.3.1/js/all.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  link(rel='stylesheet' type='text/css' src='../css/main.css')
+#landing.hero.is-fullheight
+  // Landing
+  .container.has-text-centered
+    .column.is-half.is-offset-3
+      h1.title
+        | Welcome
+      h2.subtitle
+        | Please login with your e-mail.
+      form#log
+        // Login Form
+        .box
+          .field.is-grouped
+            p.control.is-expanded
+              input#name.input(type='text' placeholder='John Doe')
+              input#logmail.input(type='email' placeholder='Enter your email')
+            p.control
+              input.button.is-danger(type='submit' value='Sign-in')
+#chat-app
+  #chat.has-text-centered
+    section.hero.is-dark
+      .hero-body
+        .container
+          h1.title Simple webchat
+          h2 Simple application made with socket.io
+    section.section.chat-container
+      .container
+        .columns
+          #avatars.column.is-one-fifth
+            // Connected users' avatars
+            div
+              h3 Connected users
+          .box.column.is-three-quarters
+            h2.title Chatbox
+            .column.chat-messages
+              ul#chat-messages
+            form
+              #msg.field.has-addons
+                p.control.is-expanded
+                  input#message.input(type='text' placeholder='Type your message here.')
+                p.control
+                  input.button.is-dark(type='submit' value='Post')
+    footer
+      .container
+        .content
+          a(href='https://bulma.io')
+            img(src='https://bulma.io/images/made-with-bulma--semiblack.png' alt='Made with Bulma' width='128' height='24')
+  script.
+    const socket = io();
+    var me = false;
+    $("form").submit(function () {
+    const message = $("#message").val();
+    if (!message) {
+    $("#message").focus();
+    return false;
+    }
+    socket.emit("newmsg", `${message}`);
+    $("#message").val(""); // Never forget to /usr/bin/flush
+    return false;
+    });
+    socket.on("newmsg", function (user) {
+    $("#chat-messages").append('<div class="notification ' + (user.id == me ? "is-primary has-text-right" : "is-danger has-text-left") + '"><img class="image is-24x24" src="' + user.img + '" id="' + user.id + '">' + user.lastMsg + "</div>");
+    $("#message").focus();
+    });
+    $("#log").submit(function () {
+    const name = $("#name").val();
+    const mail = $("#logmail").val();
+    socket.emit("newlogin", {
+    name: `${name}`,
+    mail: `${mail}`
+    });
+    me = mail.replace('@', '-').replace('.', '-');//Get the user.id
+    });
+    socket.on("newusr", function (user) {
+    $("#avatars").append('<img src="' + user.img + '" id="' + user.id + '">');
+    });
+    socket.on("logged", function () {
+    $("#landing").fadeOut();
+    $("#message").focus();
+    });
+    socket.on("usrdisc", function (user) {// when a user disconnects
+    $("#" + user.id + "").remove();//Remove it's avatars
+    });
