@@ -4,7 +4,7 @@ var md5 = require('md5');
 
 var app = express();
 
-const APP_PORT = 3030;
+const APP_PORT = 3000;
 const server = app.listen(APP_PORT, () => {
   console.log(`App running on port ${APP_PORT}`);
 })
@@ -27,6 +27,8 @@ const server = app.listen(APP_PORT, () => {
 var io = require('socket.io')(server);
 
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.set('view engine', 'pug');
 app.get('/', (req, res) => {
   res.render('index');

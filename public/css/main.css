@@ -1,0 +1,25 @@
+body {
+    font-family: 'Karla', sans-serif;
+}
+
+form {
+    margin-top: 10px;
+}
+
+#landing {
+    background: linear-gradient(
+        0.45turn,
+        #1a92ca,
+        #9735a0,
+        #f64f59
+      );
+  }
+
+.column.chat-messages {
+    max-height: 500px;
+    overflow: scroll;   
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
