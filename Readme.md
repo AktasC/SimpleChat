@@ -30,4 +30,4 @@ npm
 
 ## Contributing
 
-If you have any advices or suggestions please feel free to open an issue
+If you have any advice or suggestion please feel free to open an issue
