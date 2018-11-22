@@ -5,14 +5,15 @@ A simple webchat app to experiment with socket.io
 ## Getting Started
 
 ```
+npm install
 npm start
 ```
 
 ### Prerequisites
 
-```
+`
 npm
-```
+`
 
 ### Todo
 
