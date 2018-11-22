@@ -1,6 +1,10 @@
-# Simple Webchat
+<h1 align="center">Simple Webchat</h1>
+<p align="center">
+    <img src="https://i.imgur.com/C7Aq1Ke.png" width="850">
+  </a>
+</p>
 
-A simple webchat app to experiment with socket.io
+A simple webchat app to experiment with the awesome [Socket.io 2.0](https://socket.io/)
 
 ## Getting Started
 
